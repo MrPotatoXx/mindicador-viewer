@@ -1,17 +1,22 @@
 ---
 import "../styles/global.css";
 
+const res = await fetch("https://mindicador.cl/api");
+const data = await res.json();
+const dolar = data.dolar.valor;
+const uf = data.uf.valor;
 ---
 
-<html lang="en">
+<html lang="es">
 	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
+		<meta charset="UTF-8" />
+		<title>Indicadores Económicos</title>
 	</head>
-	<body>
-		<h1>Astro</h1>
+	<body class="bg-gray-100 text-gray-900 p-6">
+		<h1 class="text-2xl font-bold mb-4">Indicadores económicos de Chile</h1>
+		<div class="bg-white p-4 rounded shadow">
+			<p><strong>UF:</strong> $ {uf.toLocaleString("es-CL")}</p>
+			<p><strong>Dólar:</strong> $ {dolar.toLocaleString("es-CL")}</p>
+		</div>
 	</body>
 </html>
