@@ -27,12 +27,12 @@ function handleChange(e: Event) {
     <h2 class="text-2xl font-semibold mb-4 text-gray-800">Indicadores actuales:</h2>
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
       <IndicadorCard nombre={data.uf.nombre} valor={data.uf.valor} unidad={data.uf.unidad_medida} slug="uf" />
-      <IndicadorCard nombre={data.dolar.nombre} valor={data.dolar.valor} unidad={data.dolar.unidad_medida} slug="dolar" />
-      <IndicadorCard nombre={data.euro.nombre} valor={data.euro.valor} unidad={data.euro.unidad_medida} slug="euro" />
-      <IndicadorCard nombre={data.utm.nombre} valor={data.utm.valor} unidad={data.utm.unidad_medida} slug="utm" />
       <IndicadorCard nombre={data.ivp.nombre} valor={data.ivp.valor} unidad={data.ivp.unidad_medida} slug="ivp" />
+      <IndicadorCard nombre={data.dolar.nombre} valor={data.dolar.valor} unidad={data.dolar.unidad_medida} slug="dolar" />
       <IndicadorCard nombre={data.dolar_intercambio.nombre} valor={data.dolar_intercambio.valor} unidad={data.dolar_intercambio.unidad_medida} slug="dolar_intercambio" />
+      <IndicadorCard nombre={data.euro.nombre} valor={data.euro.valor} unidad={data.euro.unidad_medida} slug="euro" />
       <IndicadorCard nombre={data.ipc.nombre} valor={data.ipc.valor} unidad={data.ipc.unidad_medida} slug="ipc" />
+      <IndicadorCard nombre={data.utm.nombre} valor={data.utm.valor} unidad={data.utm.unidad_medida} slug="utm" />
       <IndicadorCard nombre={data.imacec.nombre} valor={data.imacec.valor} unidad={data.imacec.unidad_medida} slug="imacec" />
       <IndicadorCard nombre={data.tpm.nombre} valor={data.tpm.valor} unidad={data.tpm.unidad_medida} slug="tpm" />
       <IndicadorCard nombre={data.libra_cobre.nombre} valor={data.libra_cobre.valor} unidad={data.libra_cobre.unidad_medida} slug="libra_cobre" />
