@@ -1,27 +1,13 @@
 ---
 import Layout from '../components/Layout.astro';
 import IndicadorCard from '../components/IndicadorCard.astro';
-import FechaSelector from '../components/FechaSelector.astro';
 import { getIndicadores } from '../utils/api.js';
 
 const data = await getIndicadores();
-
-function handleChange(e: Event) {
-  const target = e.target as HTMLInputElement;
-  const fecha = target.value.split('-').reverse().join('-');
-  window.location.href = `/fecha/${fecha}`;
-}
 ---
 
 <Layout title="Inicio - Indicadores Económicos">
   <h1 class="text-3xl font-bold mb-6 text-center text-blue-700">📈 Indicadores Económicos de Hoy</h1>
-
-  <section class="mb-8">
-    <p class="text-center mb-4 text-gray-700">Selecciona una fecha para ver los indicadores históricos:</p>
-    <div class="flex justify-center">
-      <FechaSelector on:change={handleChange} />
-    </div>
-  </section>
 
   <section>
     <h2 class="text-2xl font-semibold mb-4 text-gray-800">Indicadores actuales:</h2>
