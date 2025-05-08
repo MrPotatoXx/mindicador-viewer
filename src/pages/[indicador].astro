@@ -1,33 +1,38 @@
 ---
-import Layout from '../components/Layout.astro';
-import { getIndicador } from '../utils/api.js';
-import { formatValor } from '../utils/format.js';
+import Layout from '../components/Layout.astro'; // Se importa el componente Layout para estructurar la página
+import { getIndicador } from '../utils/api.js'; // Se importa la función para obtener los datos del indicador desde la API
+import { formatValor } from '../utils/format.js'; // Se importa la función para formatear el valor de los indicadores
 
+// Definición de la interfaz para cada elemento de la serie
 interface SerieItem {
-  fecha: string;
-  valor: number;
+  fecha: string; // Representa la fecha del dato en formato ISO string
+  valor: number; // Representa el valor numérico del indicador
 }
 
+// Se extrae el parámetro 'indicador' de la URL
 const { indicador } = Astro.params;
 
-let data = null;
-let valores: SerieItem[] = [];
-let hasError = false;
+let data = null; // Variable para almacenar los datos del indicador
+let valores: SerieItem[] = []; // Arreglo para almacenar la serie de valores del indicador
+let hasError = false; // Bandera para indicar si existe algún error al obtener los datos
 
 try {
+  // Se intenta obtener los datos correspondientes al indicador
   data = await getIndicador(indicador);
 
   if (!data?.serie?.length) {
+    // Si no existen datos en 'serie', se activa la bandera de error
     hasError = true;
   } else {
+    // Se extraen los primeros 30 registros y se invierte el orden para una mejor visualización cronológica
     valores = data.serie.slice(0, 30).reverse();
   }
 } catch (err) {
+  // Captura y manejo de cualquier error que ocurra durante la solicitud
   const error = err as Error;
   console.error("Error al obtener el indicador:", error.message);
   hasError = true;
 }
-
 ---
 
 <Layout title={`Indicador: ${data?.nombre || 'No encontrado'}`}>
