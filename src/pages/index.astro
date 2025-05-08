@@ -1,17 +1,21 @@
 ---
-import Layout from '../components/Layout.astro';
-import IndicadorCard from '../components/IndicadorCard.astro';
-import { getIndicadores } from '../utils/api.js';
+import Layout from '../components/Layout.astro'; // Se importa el layout general para estructurar la página
+import IndicadorCard from '../components/IndicadorCard.astro'; // Se importa el componente para mostrar la tarjeta de cada indicador
+import { getIndicadores } from '../utils/api.js'; // Se importa la función para obtener los datos de los indicadores
 
+// Se obtiene la información actual de todos los indicadores mediante una llamada asíncrona
 const data = await getIndicadores();
 ---
 
 <Layout title="Inicio - Indicadores Económicos">
+  <!-- Título principal de la página -->
   <h1 class="text-3xl font-bold mb-6 text-center text-blue-700">📈 Indicadores Económicos de Hoy</h1>
 
   <section>
+    <!-- Subtítulo de la sección: muestra los indicadores actuales -->
     <h2 class="text-2xl font-semibold mb-4 text-gray-800">Indicadores actuales:</h2>
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+      <!-- Cada componente IndicadorCard muestra la información de un indicador específico -->
       <IndicadorCard nombre={data.uf.nombre} valor={data.uf.valor} unidad={data.uf.unidad_medida} slug="uf" />
       <IndicadorCard nombre={data.ivp.nombre} valor={data.ivp.valor} unidad={data.ivp.unidad_medida} slug="ivp" />
       <IndicadorCard nombre={data.dolar.nombre} valor={data.dolar.valor} unidad={data.dolar.unidad_medida} slug="dolar" />
