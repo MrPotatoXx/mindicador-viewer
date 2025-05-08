@@ -1,26 +1,9 @@
 ---
-const { nombre, valor, unidad } = Astro.props;
-
-function formatValor(valor: number, unidad: string) {
-  const formatted = valor.toLocaleString('es-CL');
-
-  if (unidad.toLowerCase().includes('peso')) {
-    return `$${formatted}`;
-  }
-
-  if (unidad.toLowerCase().includes('porcentaje')) {
-    return `${formatted}%`;
-  }
-
-  if (unidad.toLowerCase().includes('dólar') || unidad.toLowerCase().includes('dolar')) {
-    return `US$${formatted}`;
-  }
-
-  return `${formatted} ${unidad}`;
-}
+const { nombre, valor, unidad, slug } = Astro.props;
+import { formatValor } from '../utils/format.js';
 ---
 
-<div class="bg-white rounded-lg shadow p-4 text-center hover:shadow-md transition">
+<a href={`/${slug}`} class="bg-white rounded-lg shadow p-4 text-center hover:shadow-lg hover:ring-2 hover:ring-blue-500 transition block">
   <h3 class="text-xl font-semibold">{nombre}</h3>
   <p class="text-3xl text-blue-600 mt-2">{formatValor(valor, unidad)}</p>
-</div>
+</a>
