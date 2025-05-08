@@ -1,9 +1,15 @@
 ---
-const { nombre, valor, unidad, slug } = Astro.props;
-import { formatValor } from '../utils/format.js';
+const { nombre, valor, unidad, slug } = Astro.props; // Extraemos las propiedades recibidas para usar en el componente
+import { formatValor } from '../utils/format.js'; // Importamos la función para formatear el valor según la unidad
 ---
 
+<!--
+  Componente IndicadorCard:
+  - Representa una tarjeta que muestra información de un indicador.
+-->
 <a href={`/${slug}`} class="bg-white rounded-lg shadow p-4 text-center hover:shadow-lg hover:ring-2 hover:ring-blue-500 transition block">
+  <!-- Título del indicador -->
   <h3 class="text-xl font-semibold">{nombre}</h3>
+  <!-- Valor formateado, que se muestra en un formato grande y destacado -->
   <p class="text-3xl text-blue-600 mt-2">{formatValor(valor, unidad)}</p>
 </a>
