@@ -1,22 +1,43 @@
 ---
-import "../styles/global.css";
+import Layout from '../components/Layout.astro';
+import IndicadorCard from '../components/IndicadorCard.astro';
+import FechaSelector from '../components/FechaSelector.astro';
+import { getIndicadores } from '../utils/api.js';
 
-const res = await fetch("https://mindicador.cl/api");
-const data = await res.json();
-const dolar = data.dolar.valor;
-const uf = data.uf.valor;
+const data = await getIndicadores();
+
+function handleChange(e: Event) {
+  const target = e.target as HTMLInputElement;
+  const fecha = target.value.split('-').reverse().join('-');
+  window.location.href = `/fecha/${fecha}`;
+}
 ---
 
-<html lang="es">
-	<head>
-		<meta charset="UTF-8" />
-		<title>Indicadores Económicos</title>
-	</head>
-	<body class="bg-gray-100 text-gray-900 p-6">
-		<h1 class="text-2xl font-bold mb-4">Indicadores económicos de Chile</h1>
-		<div class="bg-white p-4 rounded shadow">
-			<p><strong>UF:</strong> $ {uf.toLocaleString("es-CL")}</p>
-			<p><strong>Dólar:</strong> $ {dolar.toLocaleString("es-CL")}</p>
-		</div>
-	</body>
-</html>
+<Layout title="Inicio - Indicadores Económicos">
+  <h1 class="text-3xl font-bold mb-6 text-center text-blue-700">📈 Indicadores Económicos de Hoy</h1>
+
+  <section class="mb-8">
+    <p class="text-center mb-4 text-gray-700">Selecciona una fecha para ver los indicadores históricos:</p>
+    <div class="flex justify-center">
+      <FechaSelector on:change={handleChange} />
+    </div>
+  </section>
+
+  <section>
+    <h2 class="text-2xl font-semibold mb-4 text-gray-800">Indicadores actuales:</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+      <IndicadorCard nombre={data.uf.nombre} valor={data.uf.valor} unidad={data.uf.unidad_medida} slug="uf" />
+      <IndicadorCard nombre={data.dolar.nombre} valor={data.dolar.valor} unidad={data.dolar.unidad_medida} slug="dolar" />
+      <IndicadorCard nombre={data.euro.nombre} valor={data.euro.valor} unidad={data.euro.unidad_medida} slug="euro" />
+      <IndicadorCard nombre={data.utm.nombre} valor={data.utm.valor} unidad={data.utm.unidad_medida} slug="utm" />
+      <IndicadorCard nombre={data.ivp.nombre} valor={data.ivp.valor} unidad={data.ivp.unidad_medida} slug="ivp" />
+      <IndicadorCard nombre={data.dolar_intercambio.nombre} valor={data.dolar_intercambio.valor} unidad={data.dolar_intercambio.unidad_medida} slug="dolar_intercambio" />
+      <IndicadorCard nombre={data.ipc.nombre} valor={data.ipc.valor} unidad={data.ipc.unidad_medida} slug="ipc" />
+      <IndicadorCard nombre={data.imacec.nombre} valor={data.imacec.valor} unidad={data.imacec.unidad_medida} slug="imacec" />
+      <IndicadorCard nombre={data.tpm.nombre} valor={data.tpm.valor} unidad={data.tpm.unidad_medida} slug="tpm" />
+      <IndicadorCard nombre={data.libra_cobre.nombre} valor={data.libra_cobre.valor} unidad={data.libra_cobre.unidad_medida} slug="libra_cobre" />
+      <IndicadorCard nombre={data.tasa_desempleo.nombre} valor={data.tasa_desempleo.valor} unidad={data.tasa_desempleo.unidad_medida} slug="tasa_desempleo" />
+      <IndicadorCard nombre={data.bitcoin.nombre} valor={data.bitcoin.valor} unidad={data.bitcoin.unidad_medida} slug="bitcoin" />
+    </div>
+  </section>
+</Layout>
