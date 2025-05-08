@@ -34,7 +34,7 @@ mindicador-viewer/
 *   Clona el repositorio:
 
 ```bash
-git clone https://github.com/tuusuario/mindicador-viewer.git
+git clone https://github.com/MrPotatoXx/mindicador-viewer
 cd mindicador-viewer
 ```
 *   Instala las dependencias:
