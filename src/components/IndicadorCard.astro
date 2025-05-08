@@ -1,0 +1,26 @@
+---
+const { nombre, valor, unidad } = Astro.props;
+
+function formatValor(valor: number, unidad: string) {
+  const formatted = valor.toLocaleString('es-CL');
+
+  if (unidad.toLowerCase().includes('peso')) {
+    return `$${formatted}`;
+  }
+
+  if (unidad.toLowerCase().includes('porcentaje')) {
+    return `${formatted}%`;
+  }
+
+  if (unidad.toLowerCase().includes('dólar') || unidad.toLowerCase().includes('dolar')) {
+    return `US$${formatted}`;
+  }
+
+  return `${formatted} ${unidad}`;
+}
+---
+
+<div class="bg-white rounded-lg shadow p-4 text-center hover:shadow-md transition">
+  <h3 class="text-xl font-semibold">{nombre}</h3>
+  <p class="text-3xl text-blue-600 mt-2">{formatValor(valor, unidad)}</p>
+</div>
