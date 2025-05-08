@@ -5,15 +5,19 @@ import "../styles/global.css";
 
 <html lang="es">
   <head>
+    <!-- Metadatos y enlaces a fuentes -->
     <meta charset="UTF-8" />
     <title>{title}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
   </head>
-  <body class="bg-gradient-to-b from-sky-50 to-white text-gray-800 font-[Inter] min-h-screen">
+  <body class="bg-gradient-to-b from-sky-200 to-white text-gray-800 font-[Inter] min-h-screen">
+    <!-- Encabezado de la página -->
     <header class="mb-8 border-b py-4">
+      <!-- Título principal de la aplicación -->
       <h1 class="text-3xl font-bold text-center text-blue-700">📊 Indicadores Económicos</h1>
     </header>
+    <!-- Área principal donde se inyecta el contenido dinámico -->
     <main class="max-w-5xl mx-auto px-6">
       <slot />
     </main>
