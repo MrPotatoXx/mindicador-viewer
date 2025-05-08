@@ -1,0 +1,49 @@
+---
+import Layout from '../components/Layout.astro';
+import { getIndicador } from '../utils/api.js';
+import { formatValor } from '../utils/format.js';
+
+interface SerieItem {
+  fecha: string;
+  valor: number;
+}
+
+const { indicador } = Astro.params;
+const data = await getIndicador(indicador);
+const valores = (data.serie.slice(0, 30).reverse()) as SerieItem[];
+---
+
+<Layout title={`Indicador: ${data.nombre}`}>
+  <section class="mb-8">
+    <h1 class="text-3xl font-bold mb-2 text-blue-700">{data.nombre}</h1>
+    <p class="text-lg text-gray-700">
+      Valor actual:
+      <strong class="text-blue-600">{formatValor(data.serie[0].valor, data.unidad_medida)}</strong>
+    </p>
+    <p class="text-sm text-gray-500">Unidad: {data.unidad_medida}</p>
+  </section>
+
+  <section>
+    <h2 class="text-2xl font-semibold mb-4 text-gray-800">Últimos 30 valores</h2>
+    <div class="overflow-x-auto">
+      <table class="min-w-full bg-white rounded shadow border border-gray-200">
+        <thead class="bg-blue-100 text-blue-700">
+          <tr>
+            <th class="text-left py-2 px-4 border-b">Fecha</th>
+            <th class="text-left py-2 px-4 border-b">Valor</th>
+          </tr>
+        </thead>
+        <tbody>
+          {
+            valores.map((item) => (
+              <tr class="hover:bg-blue-50 transition">
+                <td class="py-2 px-4 border-b">{item.fecha.split('T')[0]}</td>
+                <td class="py-2 px-4 border-b">{formatValor(item.valor, data.unidad_medida)}</td>
+              </tr>
+            ))
+          }
+        </tbody>
+      </table>
+    </div>
+  </section>
+</Layout>
